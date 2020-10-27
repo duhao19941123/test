@@ -1,5 +1,7 @@
 package  com.dh.taobao.controller;
 
+import com.dh.taobao.constant.ResponseData;
+import com.dh.taobao.constant.SuccessResponseData;
 import com.dh.taobao.service.TbGoodsRemainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +22,9 @@ public class TbGoodsRemainController {
     private TbGoodsRemainService tbGoodsRemainService;
 
     @GetMapping("test")
-    public String test(String id){
-       return tbGoodsRemainService.getById(id).getGoodsSize();
+    public ResponseData test(String id){
+       return new SuccessResponseData(tbGoodsRemainService.getById(id).getGoodsSize());
     }
+
+
 }

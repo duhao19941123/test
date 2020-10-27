@@ -11,6 +11,11 @@ import java.util.List;
  */
 public interface TbUserService {
 
-   
 
+    /**
+     * 通过用户名获取账号
+     * @param userName
+     * @return
+     */
+    TbUser getByUserName(String userName);
 }

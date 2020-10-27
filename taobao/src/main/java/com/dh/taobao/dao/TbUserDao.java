@@ -14,5 +14,11 @@ import java.util.List;
 @Mapper
 public interface TbUserDao {
 
-   
+
+    /**
+     * 通过用户名获取账号
+     * @param userName
+     * @return
+     */
+    TbUser getByUserName(String userName);
 }

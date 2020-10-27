@@ -1,5 +1,8 @@
 package com.dh.taobao.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-10-26 22:58:37
  */
+@Getter
+@Setter
 public class TbGoodsRemain implements Serializable {
     private static final long serialVersionUID = 625704246216052001L;
     /**

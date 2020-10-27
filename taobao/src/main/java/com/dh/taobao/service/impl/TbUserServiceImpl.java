@@ -19,5 +19,8 @@ public class TbUserServiceImpl implements TbUserService {
     @Resource
     private TbUserDao tbUserDao;
 
-   
+    @Override
+    public TbUser getByUserName(String userName) {
+        return tbUserDao.getByUserName(userName);
+    }
 }

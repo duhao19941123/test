@@ -12,6 +12,14 @@
         <result property="isDeleted" column="is_deleted" jdbcType="INTEGER"/>
     </resultMap>
 
-    
+    <sql id="Base_Column_List">
+        id,user_name,pass_word,img,nick_name,is_deleted
+    </sql>
+
+    <select id="getByUserName" resultType="com.dh.taobao.entity.TbUser">
+        select <include refid="Base_Column_List" /> from tb_user
+        where is_deleted = 0 and user_name = #{userName}
+    </select>
+
 
 </mapper>

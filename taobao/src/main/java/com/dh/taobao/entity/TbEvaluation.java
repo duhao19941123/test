@@ -1,5 +1,8 @@
 package com.dh.taobao.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +11,8 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-10-26 23:05:34
  */
+@Getter
+@Setter
 public class TbEvaluation implements Serializable {
     private static final long serialVersionUID = -20632790895576731L;
     
