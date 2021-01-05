@@ -9,7 +9,12 @@ import com.dh.taobao.dto.UserParam;
 import com.dh.taobao.entity.TbUser;
 import com.dh.taobao.exception.UserException;
 import com.dh.taobao.service.TbUserService;
+import com.dh.taobao.util.PasswordUtil;
 import com.dh.taobao.util.RedisUtils;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.ObjectUtils;
 import org.springframework.validation.annotation.Validated;
@@ -34,16 +39,22 @@ public class TbUserController {
     @Autowired
     private RedisUtils redisUtils;
 
+    @ApiOperation(value = "登陆" , response = SuccessResponseData.class
+    )
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName",value = "用户名" , required = false,dataType = "String"),
+            @ApiImplicitParam(name = "passWord",value = "密码" , required = false,dataType = "String")
+    })
     @PostMapping("login")
     public ResponseData login(@RequestBody @Validated({UserParam.login.class})  UserParam userParam){
         TbUser tbUser = tbUserService.getByUserName(userParam.getUserName());
         if(ObjectUtils.isEmpty(tbUser)){
             throw new ServiceException(UserException.NOT_USER);
         }
-        if(!userParam.getPassWord().equals(tbUser.getPassWord())){
+        String passWord = PasswordUtil.encrypt( userParam.getUserName(), userParam.getPassWord(), PasswordUtil.getStaticSalt());
+        if(!passWord.equals(tbUser.getPassWord())){
             throw new ServiceException(UserException.ERR_PWD);
         }
-
         String key = RedisKey.FRONT_LOGIN_USER_KEY + tbUser.getId();
         String userString = JSONObject.toJSONString(tbUser);
         redisUtils.set(key , userString);

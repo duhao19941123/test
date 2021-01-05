@@ -30,17 +30,17 @@ public class TokenFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletRequest.setCharacterEncoding("UTF-8");
         servletResponse.setCharacterEncoding("UTF-8");
-
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if(!PassUrl.list.contains(request.getServletPath())){
-            // 拦截接口校验token
-            String tokenKey = request.getHeader("Authorization");
-            if(StringUtils.isBlank(tokenKey)){
-                this.unLogin(response);
-                return;
-            }
-        }
+//
+//        HttpServletRequest request = (HttpServletRequest) servletRequest;
+//        HttpServletResponse response = (HttpServletResponse) servletResponse;
+//        if(!PassUrl.list.contains(request.getServletPath())){
+//            // 拦截接口校验token
+//            String tokenKey = request.getHeader("Authorization");
+//            if(StringUtils.isBlank(tokenKey)){
+//                this.unLogin(response);
+//                return;
+//            }
+//        }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
